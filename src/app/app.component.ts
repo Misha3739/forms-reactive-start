@@ -24,11 +24,26 @@ export class AppComponent implements OnInit{
       'gender': new FormControl('male'),
       'hobbies': new FormArray([])
     });
+    this.signupForm.statusChanges.subscribe((value) => {
+      console.log(value);
+    });
+
+
+    this.signupForm.patchValue({
+      'userData' : {
+        'username' : 'Mihail',
+        'email' : 'mihail.udot@yandex.ru'
+      },
+      //Not working!
+      'gender': 'male'
+    });
   }
 
   onSubmit()
   {
     console.log(this.signupForm);
+
+    this.signupForm.reset();
   }
 
   onAddHobby()
@@ -50,7 +65,7 @@ export class AppComponent implements OnInit{
   {
     const promise = new Promise<any>((resolve, reject) => {
       setTimeout(() => {
-        if(control.value.startsWith('mihail'))
+        if(control.value.startsWith('mihuil'))
         {
           resolve({'emailIsForbidden' : true});
         }
